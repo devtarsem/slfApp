@@ -1,0 +1,59 @@
+.menu{
+    background-color: var(--color-white);
+    border-top: 0.1rem solid var(--color-fade);
+    border-radius: 0 !important;
+}
+.menuLink{
+    text-decoration: none;
+    color: #000;
+}
+
+/**********************/
+.billmenu{
+    height: 10vh;
+}
+.itemsp,.sellP{
+    font-size: 1.4rem;
+}
+.sellP{
+    background-color: var(--color-first);
+    padding: 1rem;
+    color: var(--color-white);
+    font-weight: 700;
+    text-decoration: none;
+}
+.billcontext{
+    background-color: var(--color-second);
+}
+.filterbtnp{
+    background: none;
+    border: none;
+    font-family: 'Montserrat';
+    cursor: pointer;
+}
+.standardBtn{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: var(--color-first);
+    color: var(--color-white);
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+.proddets{
+    text-decoration: none;
+    color: #000;
+}
+.tags{
+    font-size: 1.2rem;
+}
+.name{
+    font-size: 1.2rem;
+    color: #000;
+}
+.price{
+    font-size: 1.6rem;
+    font-weight: 700;
+}

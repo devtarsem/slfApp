@@ -1,0 +1,4 @@
+.carthead{
+    border-bottom: 0.05rem solid var(--color-fade);
+    height: 10vh;
+}

@@ -5,20 +5,30 @@ import mock from '/mockup.jpg'
 import Menu from './menu'
 import BillMenu from './billmenu';
 import heart from '/heart.png'
+import heart1 from '/heart1.png'
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import productStore from '../store/products.store';
+import { usePop } from '../hook/usePop';
+import Sizes from './sizeChart';
 
 function Details(){
 
+    const {Pop} = usePop();
+
     const params = useParams()
-    const {details_of_product, updatingCart,extracted_item_FromCart ,extratingItemPresentInCartOrNot ,cart_item_ids,fetchDetailsOfProduct, addingItemstoCart} = productStore()
+    const {details_of_product, sizeChartOpener, openSizeChart,watchList, allProducts, watchListIds, watchlistAdditionToSys, updatingCart,extracted_item_FromCart ,extratingItemPresentInCartOrNot ,cart_item_ids,fetchDetailsOfProduct, addingItemstoCart} = productStore()
+
+    function watchlistAddition(event, item){
+        watchlistAdditionToSys(item)
+    }
 
     useEffect(el=>{
         console.log(params)
         fetchDetailsOfProduct(params.id)
         extratingItemPresentInCartOrNot(params.id)
-    }, [])
+    }, [params.id])
 
     const [units, setunits] = useState(1)
     const [size, setSize] = useState('')
@@ -61,6 +71,15 @@ function Details(){
     }
 
     function addingItemToCart(event,id, sku){
+        console.log(size)
+        if(!size){
+            Pop("Invalid", "Please choose the size")
+            return
+        }
+        if(!color){
+            Pop("Invalid", "Please choose the color")
+            return
+        }
         const itemDetails = {
             size : size,
             units : units,
@@ -82,13 +101,27 @@ function Details(){
         updatingCart(itemDetails)
     }
 
+    function openChart(){
+        openSizeChart()
+    }
+
     return(
         <div className='details flex flex-dir '>
+            {sizeChartOpener &&
+                <Sizes/>
+            }
             <div className='images detailImaages'>
                 <div className='flexofDiscont flex flex-2 gap16'>
                     <p className='dos'>{details_of_product?.discount}% off</p>
                 </div>
                 <img src={mock} className='mockImg' alt='moock'/>
+                {/* <div className='containerOfImages flex flex-2 flex-dir gap16'>
+                    {[1,2,3].map(mo=>
+                        <button className='nextImg'>
+                            <img src={mock} className='smallmock' alt='more images'/>
+                        </button>
+                    )}
+                </div> */}
             </div>
             <div className='productDetails flex flex-dir gap16 pad16'>
                 <div className='flex gap16'>
@@ -98,9 +131,17 @@ function Details(){
                 </div>
                 <div className='flex flex-1'>
                     <p className='nameProd'>{details_of_product?.name}</p>
-                    <button className='heartbtn'>
-                        <img src={heart} className='iconHeart' alt='icon'/>
-                    </button>
+                    {watchListIds?.includes(details_of_product?._id) 
+                    ?
+                        <button onClick={(event)=> watchlistAddition(event, details_of_product)} className='heartbtn'>
+                            <img src={heart1} className='iconHeart' alt='icon'/>
+                        </button>
+                    :
+                        <button onClick={(event)=> watchlistAddition(event, details_of_product)} className='heartbtn'>
+                            <img src={heart} className='iconHeart' alt='icon'/>
+                        </button>
+                
+                    }
                 </div>
                 <p className='Description'>{details_of_product?.description}.</p>
                 <div className='flex flex-1'>
@@ -108,7 +149,10 @@ function Details(){
                     <p className='nameProd'>{details_of_product?.review_count}+ ({details_of_product?.rating}⭐)</p>
                 </div>
                 <div className='sizes flex flex-dir gap8'>
-                    <p className='sizes label'>Size</p>
+                    <div className='flex flex-1'>
+                        <p className='sizes label'>Size</p>
+                        <button onClick={openChart} className='sizeChartBtn'>Size chart</button>
+                    </div>
                     <div className='flex gap16'>
                         {details_of_product?.sizes?.map(el=>
                             <button onClick={(event)=> selectSize(event, el)} className={size == el ? 'btns sizesbox activeBoxSize' : 'btns sizesbox'}>{el}</button>
@@ -138,9 +182,10 @@ function Details(){
                         <button onClick={(event) => UpdateCart(event, details_of_product._id, details_of_product.sku)} className='addtocartBtn standardBtn'>Update</button>
                         :
                         <button onClick={(event) => addingItemToCart(event, details_of_product._id, details_of_product.sku)} className='addtocartBtn standardBtn'>Add to cart</button>
-
                     }
                 </div>
+
+                
             </div>
 
         </div>

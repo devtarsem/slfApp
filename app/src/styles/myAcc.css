@@ -1,0 +1,90 @@
+.accTop{
+    height: 10vh;
+    border-bottom: 0.05rem solid var(--color-delegate);
+}
+.linkAcc{
+    text-decoration: none;
+    text-align: center;
+    background-color: var(--color-second);
+    padding: 1rem;
+    color: #000;
+    font-size: 1.2rem;
+    border: 0.05rem solid var(--color-delegate);
+}
+.orderCode{
+    border : 0.05rem solid var(--color-delegate);
+}
+.orderdet{
+    font-size: 1rem;
+}
+.orderdet span{
+    font-weight: 700;
+}
+.delstat{
+    grid-column: 1/3;
+}
+.billhis{
+    text-align: none;
+}
+.cancelBtn{
+    border: none;
+    font-family: 'Montserrat';
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: var(--color-first);
+    color: var(--color-white);
+    cursor: pointer;
+}
+.darrow{
+    width: 1.6rem;
+}
+.orIdSKU{
+    grid-column: 1/4;
+}
+.ordeIte{
+    background-color: var(--color-second);
+    border: 0.05rem solid var(--color-delegate);
+}
+.orId span{
+    font-weight: 700;
+}
+.odlink{
+    text-decoration: none;
+    color: #000;
+}
+.orderCode{
+    position: relative;
+}
+.datedesign{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: var(--color-first);
+    padding: 0 1rem;
+    color: var(--color-white);
+}
+.history{
+    height: 90vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.delspan span{
+    background-color: var(--color-third);
+    color: var(--color-white);
+    padding: 0 1rem;
+}
+.noProdFound{
+    height: 100%;
+}
+.noProd{
+    width: 70%;
+}
+.noProdtitle{
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+.rateBtn{
+    border: none;
+    background: none;
+    cursor: pointer;
+}

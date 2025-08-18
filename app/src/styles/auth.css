@@ -1,0 +1,36 @@
+.auth{
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+.authimg{
+    position: absolute;
+    width: 100%;
+    bottom: -15%;
+    left: -35%;
+    transform: rotate(45deg);
+}
+.center{
+    text-align: center;
+}
+.authBtn{
+    width: 100%;
+    border: none;
+    font-family: 'Montserrat';
+    padding: 0.5rem;
+}
+
+.authBtnActive{
+    background-color: var(--color-first);
+    color: var(--color-white);
+}
+.authcover{
+    z-index: 200;
+}
+.address{
+    grid-column: 1/3;
+}
+.auth__{
+    padding: 1rem;
+    cursor: pointer;
+}

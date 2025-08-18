@@ -1,0 +1,7 @@
+.complainBtn{
+    border: none;
+    padding: 1rem;
+    font-family: "Montserrat";
+    background-color: var(--color-first);
+    color: var(--color-white);
+}

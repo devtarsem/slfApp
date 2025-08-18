@@ -1,0 +1,52 @@
+.tick{
+    background-color: var(--color-fade);
+    padding: 1rem;
+    border: 0.05rem solid var(--color-delegate);
+}
+.title {
+    font-size: 1.2rem;
+}
+.title span{
+    font-weight: 700;
+}
+.reply span{
+    background-color: var(--color-white);
+    padding: 0.5rem 1rem;
+    display: inline-block;
+}
+.replybtn{
+    border: none;
+    font-family: 'Montserrat';
+    padding: 1rem;
+    background-color: var(--color-first);
+    color: var(--color-white);
+    cursor: pointer;
+}
+.replyPanel{
+    background-color: var(--color-first-light);
+}
+.ehanereply{
+    line-height: 1.5;
+}
+
+.server{
+    background-color: var(--color-first) !important;
+    color: var(--color-white);
+}
+
+.tick{
+    position: relative;
+    overflow: hidden;
+}
+.statusOfTicket{
+    position: absolute;
+    width: 20vh;
+    background-color: var(--color-third);
+    color: var(--color-white);
+    font-size: 1.4rem;
+    font-weight: 500;
+    right: -10%;
+    top: 6%;
+    transform: rotate(45deg);
+    box-shadow: 0 0 0.5rem #000;
+}   

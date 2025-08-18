@@ -1,0 +1,8 @@
+.passbtn{
+    border: none;
+    font-family: 'Montserrat';
+    padding: 1rem;
+    background-color: var(--color-first);
+    color: var(--color-white);
+    cursor: pointer;
+}

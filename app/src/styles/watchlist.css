@@ -1,0 +1,48 @@
+.watch{
+    height: 10vh;
+    border-bottom: 0.1rem solid var(--color-fade);
+}
+.watchlistone{
+    height: 90vh;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.imageD{
+    width: 100%;
+}
+.watchbox{
+    border: 0.1rem solid var(--color-fade);
+}
+.watchdets{
+    padding-top: 0;
+}
+.watchname,.watchrating{
+    font-size: 1.2rem;
+}
+.watchprice{
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.imgWatch{
+    position: relative;
+    overflow: hidden;
+}
+.bannerP{
+    position: absolute;
+    width: 20vh;
+    height: 2vh;
+    background-color: var(--color-first);
+    transform: rotate(-45deg);
+    top: 20%;
+    left: -20%;
+}
+.imageDWatch{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+.watchlink{
+    text-decoration: none;
+    color: #000;
+}

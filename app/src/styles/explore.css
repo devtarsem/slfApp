@@ -120,19 +120,27 @@
     position: absolute;
     width: 100%;
     height: 72vh;
-    bottom: 10vh;
+    bottom: 10%;
     left: 0;
-    background-color: var(--color-delegate);
-    z-index: 100;
+    background-color: #D9FAFF;
+    z-index: 50000;
     border-radius: 5rem 5rem 0 0;
     transition: all 0.5s;
+    display: inline-block;
+
+}
+.filttt{
+    margin-top: 1rem;
 }
 .filtersInactive {
-    bottom: -100vh;
+    bottom: 100%;
+    display: none;
     transition: all 0.5s;
 
 }
-
+.products{
+    overflow: hidden;
+}
 .paginationBox{
     width: 100%;
     height: 10vh;
@@ -142,13 +150,17 @@
     background-color: var(--color-second);
     z-index: 200;
 }
-.nextbtn{
+.nextbtn,.btnReset{
     border: none;
     font-family: 'Montserrat';
     padding: 1rem 2rem;
     background-color: var(--color-first);
     color: var(--color-white);
     cursor: pointer;
+}
+.btnReset{
+    margin-top: 1.6rem;
+    width: 100%;
 }
 .pagi{
     font-size: 1.2rem;
@@ -187,4 +199,129 @@
     text-align: center;
     top: 0;
     left: 0;
+}
+.loveprod{
+    width: 3.2rem !important;
+    border-radius: 0.1rem !important;
+    z-index: 500;
+}
+
+.Gobtn,.btnBox{
+    padding: 1rem;
+    border: none;
+    font-family: 'Montserrat';
+    background-color: var(--color-first);
+    color: var(--color-white);
+    cursor: pointer;
+}
+.inp_border{
+    border: 0.05rem solid var(--color-first);
+}
+.sizeBox{
+    background-color: var(--color-delegate) !important;
+    color: #000;
+}
+.catalogProds{
+    padding-bottom: 10vh;
+}
+
+.loaderEX{
+    grid-column: 1/3;
+}
+
+.similars{
+    grid-column: 1/3;
+}
+
+.details{
+    position: relative;
+}
+.sizeChart{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: var(--color-white);
+    z-index: 1000;
+}
+.navs{
+    width: 100%;
+    grid-column: 1/2;
+    height: 90vh;
+    background-color: var(--color-second);
+    border-right: 0.05rem solid var(--color-delegate);
+}
+.dsiplaysizes{
+    grid-column: 2/6;
+}
+.btnSize{
+    width: 100%;
+    padding: 2rem;
+    border: none;
+    font-family: 'Montserrat';
+    box-shadow: 0 0 0.1rem #000;
+    cursor: pointer;
+}
+.innerNav{
+    width: 100%;
+}
+.smallSize{
+    padding: 1rem;
+    width: 100% !important;
+}
+.btnSizeColor{
+    background-color: var(--color-first);
+    color: var(--color-white);
+    font-weight: 500;
+}
+.sizeelemets{
+    height: 100%;
+    margin-top: 4.8rem;
+}
+.catagoryImg{
+    width: 100%;
+}
+.sizeInfo{
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+.clickimg{
+    width: 4.8rem;
+}
+.closeImg{
+    width: 50%;
+}
+.closebarBtn{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.sizeChartBtn{
+    background: none;
+    border: none;
+    font-family: 'Montserrat';
+    color: var(--color-first);
+    text-decoration: underline;
+    cursor: pointer;
+}
+.detailImaages{
+    position: relative;
+}
+.containerOfImages{
+    position: absolute;
+    width: 13vh;
+    height: 75%;
+    right:2%;
+    top: 5%;
+    background-color: var(--color-first-light);
+}
+.smallmock{
+    width: 10vh;
+    outline: 0.2rem solid var(--color-white);
+}
+.nextImg{
+    border: none;
+    background: none;
+    cursor: pointer;
 }

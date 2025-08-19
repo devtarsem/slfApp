@@ -85,6 +85,11 @@ function Details(){
             units : units,
             color : color,
             productId : id,
+            name : details_of_product.name,
+            brand : details_of_product.brand,
+            price : details_of_product.price,
+            image : details_of_product.Images,
+            cancel : false,
             sku : sku
         }
         addingItemstoCart(itemDetails)
@@ -96,6 +101,11 @@ function Details(){
             units : units,
             color : color,
             productId : id,
+            name : details_of_product.name,
+            brand : details_of_product.brand,
+            price : details_of_product.price,
+            image : details_of_product.Images,
+            cancel : false,
             sku : sku
         }
         updatingCart(itemDetails)

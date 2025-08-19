@@ -22,6 +22,14 @@ const productStore = create(
         tax : 0,
         total : 0,
         nonCancelOrders : 0,
+        confirmRetunsPanel : false,
+        PaymentModeWhileReturning : '',
+        setConfrimPanelOpen : async(mode)=>{
+            set({confirmRetunsPanel : true , PaymentModeWhileReturning : mode})
+        },
+        setConfrimPanelClose : async()=>{
+            set({confirmRetunsPanel : false})
+        },
         Auth : false,
         sizeChartOpener : false,
         openSizeChart : async()=>{
@@ -374,7 +382,12 @@ const productStore = create(
                     color : el.color,
                     count : el.units,
                     id : el.productId,
-                    size : el.size
+                    size : el.size,
+                    name : el.name,
+                    brand : el.brand,
+                    price : el.price,
+                    image : el.Images,
+                    cancel : el.cancel,
                 }
                 order_items.push(obj)
             })
@@ -412,7 +425,12 @@ const productStore = create(
                     color : el.color,
                     count : el.units,
                     id : el.productId,
-                    size : el.size
+                    size : el.size,
+                    name : el.name,
+                    brand : el.brand,
+                    price : el.price,
+                    image : el.Images,
+                    cancel : el.cancel,
                 }
                 order_items.push(obj)
             })

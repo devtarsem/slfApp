@@ -10,13 +10,14 @@ import heart from '/heart.png'
 import heart1 from '/heart1.png'
 import darrow from "/darrow.png"
 import noProd from "/noProd.svg"
+import close from '/close.png'
 
 import LoaderComp from './loader';
 
 
 function OrderHistory(){
 
-    const {order_history, OrdersHistory, Loader, orderCancellation, nonCancelOrders,order_history_count} = productStore()
+    const {order_history, OrdersHistory, PaymentModeWhileReturning, setConfrimPanelOpen , setConfrimPanelClose, Loader,confirmRetunsPanel, orderCancellation, nonCancelOrders,order_history_count} = productStore()
 
     useEffect(el=>{
         OrdersHistory()
@@ -30,9 +31,53 @@ function OrderHistory(){
         orderCancellation(id)
     }
 
+    function openPanelConfirmation_of_returns(el, payment){
+        console.log(payment)
+        if(payment==''){
+            setConfrimPanelOpen("COD")
+        }else{
+            setConfrimPanelOpen("ONLINE")
+        }
+    }
+
+    function closeConfirmReturnPanel(){
+        setConfrimPanelClose()
+    }
+
 
     return(
-        <div className='orders'>
+        <div className='orders orders_history_com'>
+            {confirmRetunsPanel &&
+                <div className='returnConfirmation flex pad16 flex-dir gap16'>
+                    <div className='flex flex-1'>
+                        <h2 className='cofirmHead'>Confirm return</h2>
+                        <button onClick={closeConfirmReturnPanel} className='closebarBtn'>
+                            <img src={close} alt='close' className='closeImg'/>
+                        </button>
+                    </div>
+                    <p className='batchMode'>Payment mode : <span>{PaymentModeWhileReturning}</span></p>
+                    {PaymentModeWhileReturning == 'ONLINE' &&
+                        <p className='desReutnr'>Your amount will be refunded in 4-5 business days.</p>
+                    }
+                    {PaymentModeWhileReturning == 'COD' &&
+                        <div className='refundAcc flex flex-dir gap16'>
+                            <p className='desReutnr'>Add Bank for receiving refund</p>
+
+                            <div className='flex flex-dir gap8'>
+                                <label className='label'>Bank account number</label>
+                                <input className='inp' type='number' placeholder='647884.....'/>
+                            </div>
+                            <div className='flex flex-dir gap8'>
+                                <label className='label'>IFSC code</label>
+                                <input className='inp' type='text' placeholder='647884.....'/>
+                            </div>
+                        </div>
+                    }
+                    <button className='refundBtn'>Confirm return</button>
+                </div>
+            }
+
+
             <div className='accTop pad16 flex flex-3'>
                 <h1 className='head1'>Order history</h1>
             </div>
@@ -66,24 +111,32 @@ function OrderHistory(){
                                     <p className='orderdet  delspan'>Delivery status &mdash; <span>{el.delivery_status}</span></p>
                                 </div>
                                 <div className='grid grid-2-col gap8'>
-                                    <p className='orderdet billhis'>Gross bill &mdash; <span>₹{el.gross_bill}/-</span></p>
-                                    <p className='orderdet billhis'>Tax &mdash;<span>₹{el.tax}/-</span></p>
-                                    <p className='orderdet billhis'>Total bill &mdash; <span>₹{el.total_bill}/-</span></p>
+                                    <p className='orderdet billhis'>Gross bill &mdash; <span>₹{el.gross_bill.toFixed(2)}/-</span></p>
+                                    <p className='orderdet billhis'>Tax &mdash;<span>₹{el.tax.toFixed(2)}/-</span></p>
+                                    <p className='orderdet billhis'>Total bill &mdash; <span>₹{el.total_bill.toFixed(2)}/-</span></p>
                                 </div>
-                                
+
                                 <div className='flex flex-3 gap16'>
                                     <button className='cancelBtn'>Items</button>
                                 </div>
-                                <div className='orderDetails'>
+                                <div className='orderDetails flex flex-dir gap8'>
                                     {el.order_items.map(item=>
-                                        <Link to={`/product/${item.id}`} className='odlink'>
-                                            <div className='ordeIte grid grid-3-col gap8 pad8'>
-                                                <p className='orId orIdSKU'>SKU code &mdash; <span>{item.id}</span></p>
-                                                <p className='orId'>Color &mdash; <span>{item.color}</span></p>
-                                                <p className='orId'>Quanity &mdash; <span>{item.count}</span></p>
-                                                <p className='orId'>Size &mdash; <span>{item.size}</span></p>
-                                            </div>
-                                        </Link>
+                                        <div className='ordersku'>
+                                                <div className='ordeIte grid grid-2-col gap8 pad8'>
+                                                    <div className='detsailoforder flex flex-dir gap8'>
+                                                        <p className='orId orIdSKU'><span>{item.name}</span></p>
+                                                        <p className='orId'>Color &mdash; <span>{item.color}</span></p>
+                                                        <p className='orId'>Quanity &mdash; <span>{item.count}</span></p>
+                                                        <p className='orId'>Size &mdash; <span>{item.size}</span></p>
+                                                        <button onClick={(event)=> openPanelConfirmation_of_returns(event,el.razorpay_payment_id)} className='cancelIndbtn'>Return Item</button>
+                                                    </div>
+                                                <Link to={`/product/${item.id}`} className='odlink'>
+                                                    <div className='skuimg'>
+                                                        <img src={mock} className='mockImgOfOrder' alt='sku image'/>
+                                                    </div>                                                                                          
+                                                </Link>                                                                                                                                                                                                                                                                                                                                                      
+                                                </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                        </div>
                                     )}
                                 </div>
                             </div>

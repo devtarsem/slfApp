@@ -17,7 +17,7 @@ import LoaderComp from './loader';
 
 function OrderHistory(){
 
-    const {order_history, OrdersHistory, PaymentModeWhileReturning, setConfrimPanelOpen , setConfrimPanelClose, Loader,confirmRetunsPanel, orderCancellation, nonCancelOrders,order_history_count} = productStore()
+    const {order_history, SKUOrdercancellation,OrdersHistory, PaymentModeWhileReturning, setConfrimPanelOpen , setConfrimPanelClose, Loader,confirmRetunsPanel, orderCancellation, nonCancelOrders,order_history_count} = productStore()
 
     useEffect(el=>{
         OrdersHistory()
@@ -31,8 +31,15 @@ function OrderHistory(){
         orderCancellation(id)
     }
 
-    function openPanelConfirmation_of_returns(el, payment){
+    const [order_id, setOrder_id] = useState('')
+    const [sku_id, setsku_id] = useState('')
+
+
+    function openPanelConfirmation_of_returns(el, payment, orderID, skuID){
         console.log(payment)
+        setOrder_id(order_id=> orderID)
+        setsku_id(sku_id=> skuID)
+
         if(payment==''){
             setConfrimPanelOpen("COD")
         }else{
@@ -44,6 +51,9 @@ function OrderHistory(){
         setConfrimPanelClose()
     }
 
+    function confirmCancellation(){
+        SKUOrdercancellation(order_id, sku_id)
+    }
 
     return(
         <div className='orders orders_history_com'>
@@ -73,7 +83,10 @@ function OrderHistory(){
                             </div>
                         </div>
                     }
-                    <button className='refundBtn'>Confirm return</button>
+                    {Loader &&
+                        <LoaderComp msg="Confirming your return, please wait"/>
+                    }
+                    <button onClick={confirmCancellation} className='refundBtn'>Confirm return</button>
                 </div>
             }
 
@@ -85,7 +98,7 @@ function OrderHistory(){
                 {Loader &&
                     <LoaderComp msg="Loading Orders"/>
                 }
-                {nonCancelOrders == 0 &&
+                {(nonCancelOrders == 0 && !Loader) &&
                     <div className='flex noProdFound flex-2 flex-dir gap32'>
                         <img src={noProd} className='noProd' alt='no orders'/>
                         <p className='noProdtitle'>No Orders are there yet!</p>
@@ -121,14 +134,19 @@ function OrderHistory(){
                                 </div>
                                 <div className='orderDetails flex flex-dir gap8'>
                                     {el.order_items.map(item=>
-                                        <div className='ordersku'>
+                                        <div className={item.return ? 'ordersku opus' : 'ordersku'}>
                                                 <div className='ordeIte grid grid-2-col gap8 pad8'>
                                                     <div className='detsailoforder flex flex-dir gap8'>
                                                         <p className='orId orIdSKU'><span>{item.name}</span></p>
                                                         <p className='orId'>Color &mdash; <span>{item.color}</span></p>
                                                         <p className='orId'>Quanity &mdash; <span>{item.count}</span></p>
                                                         <p className='orId'>Size &mdash; <span>{item.size}</span></p>
-                                                        <button onClick={(event)=> openPanelConfirmation_of_returns(event,el.razorpay_payment_id)} className='cancelIndbtn'>Return Item</button>
+                                                        {!item.return &&
+                                                            <button onClick={(event)=> openPanelConfirmation_of_returns(event,el.razorpay_payment_id, el._id, item._id)} className='cancelIndbtn'>Return Item</button>
+                                                        }
+                                                        {item.return &&
+                                                            <button className='cancelledIndbtn'>cancelled</button>
+                                                        }
                                                     </div>
                                                 <Link to={`/product/${item.id}`} className='odlink'>
                                                     <div className='skuimg'>

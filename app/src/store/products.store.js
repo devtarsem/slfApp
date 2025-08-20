@@ -522,6 +522,27 @@ const productStore = create(
                 }
             })
         }
+
+        ,
+
+        SKUOrdercancellation : async(order_id, sku_id)=>{
+            set({Loader : true})
+            axios({
+                method : "POST",
+                url : "https://demandbackend.onrender.com/api/v1/order/cancel-sku",
+                data : {
+                    order_id,
+                    sku_id,
+                    token : JSON.parse(localStorage.getItem("SLFAuth")).token
+
+                }
+            }).then(res=>{
+                if(res.data.status=='success'){
+                    set({cancelled_SKU:[],confirmRetunsPanel : false,Loader : false,order_history : res.data.data.orders})
+                    get().order_history_count(res.data.data.orders)
+                }
+            })
+        }
         
         ,
 
@@ -551,6 +572,28 @@ const productStore = create(
                 set({order_history : get().order_history})
                 get().order_history_count(get().order_history)
 
+
+            }
+        }
+
+        ,
+        cancelled_SKU : [],
+        cancelledSKUFetching : async()=>{
+            set({Loader : true})
+            if(get().cancelled_SKU.length == 0){
+                axios({
+                    method : "POST",
+                    url : "https://demandbackend.onrender.com/api/v1/order/cancel-sku-fetch",
+                    data : {
+                        token : JSON.parse(localStorage.getItem("SLFAuth")).token
+                    }
+                }).then(res=>{
+                    if(res.data.status=='success'){
+                        set({Loader : false,cancelled_SKU : res.data.data.cancel_sku})
+                    }
+                })
+            }else{
+                set({Loader : false,cancelled_SKU : get().cancelled_SKU})
 
             }
         }

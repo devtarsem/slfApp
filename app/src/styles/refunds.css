@@ -3,3 +3,19 @@
     overflow: scroll;
     overflow-x: hidden;
 }
+.skucancel{
+    background-color: var(--color-second);
+    box-shadow: 0 0 0.1rem var(--color-first);
+}
+.refundStatus{
+    grid-column: 1/3;
+}
+.redStatus,.GreenStatus{
+    background-color: red;
+    color: var(--color-white);
+    padding: 0.5rem 2rem;
+}
+.GreenStatus{
+    background-color: green;
+
+}

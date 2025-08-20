@@ -92,7 +92,7 @@
 .mockImgOfOrder{
     width: 100%;
 }
-.cancelIndbtn,.refundBtn{
+.cancelIndbtn,.refundBtn, .cancelledIndbtn{
     border: none;
     font-family: 'Montserrat';
     font-size: 1rem;
@@ -100,6 +100,10 @@
     color: var(--color-white);
     padding: 0.5rem;
     cursor: pointer;
+}
+.cancelledIndbtn{
+    background-color: grey;
+    cursor:not-allowed;
 }
 .cofirmHead{
     font-size: 1.8rem;
@@ -115,7 +119,9 @@
 .ordersku{
     border-left: 0.2rem solid var(--color-first);
 }
-
+.opus{
+    opacity: 0.5;
+}
 
 
 .returnConfirmation{

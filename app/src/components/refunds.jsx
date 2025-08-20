@@ -10,13 +10,16 @@ import heart from '/heart.png'
 import heart1 from '/heart1.png'
 import LoaderComp from './loader';
 import noTic from '/noticket.svg'
+import noProd from "/noProd.svg"
+
 
 function Refunds(){
 
-    const {OrdersHistory, order_history, Loader} = productStore()
+    const {OrdersHistory, order_history, Loader, cancelled_SKU, cancelledSKUFetching} = productStore()
 
     useEffect(el=>{
-        OrdersHistory()
+        // OrdersHistory()
+        cancelledSKUFetching()
     }, [])
 
     const [zeroCancellation, setZeroCancellation] = useState(false);
@@ -45,57 +48,34 @@ function Refunds(){
                 {Loader &&
                     <LoaderComp msg="Loading your refunds & returns"/>
                 }
-                {zeroCancellation &&
-                    <div className='noTickets flex flex-dir gap16 flex-2'>
-                        <img src={noTic} className='noTicket' alt='no tickets found'/>
-                        <p className='noticfound'>No refund / return orders</p>
+                {(cancelled_SKU?.length == 0 && !Loader) &&
+                    <div className='flex noProdFound flex-2 flex-dir gap32'>
+                        <img src={noProd} className='noProd' alt='no orders'/>
+                        <p className='noProdtitle'>No refunds are pending</p>
                     </div>
                 }
-                {order_history?.map(el=>
-                    <>
-                    {el.cancel_status == 'cancelled' &&
-                        <div className='orderCode pad16 flex flex-dir gap8'>
-                            <div className='datedesign'>
-                                <p className='dateeedes'>Order Date &mdash; {el.created_at}</p>
+                
+                <div className='flex flex-dir gap16'>
+                    {cancelled_SKU?.map(el=>
+                        <div className='skucancel grid grid-2-col gap16 pad16'>
+                            <div className='contentSku flex flex-dir gap8 '>
+                                <p className='orId orIdSKU'><span>{el.name}</span></p>
+                                <p className='orId'>Color &mdash; <span>{el.color}</span></p>
+                                <p className='orId'>Quanity &mdash; <span>{el.count}</span></p>
+                                <p className='orId'>Size &mdash; <span>{el.size}</span></p>
                             </div>
-                            <div className='flex flex-1'>
-                                <p className='orderdet'>Number of items &mdash; <span>{el.order_items.length}</span></p>
-                                <button className='cancelBtn'>Order cancelled</button>
+                            <div className='contentSku '>
+                                <Link to={`/product/${6556}`} className='odlink'>
+                                    <div className='skuimg'>
+                                        <img src={mock} className='mockImgOfOrder' alt='sku image'/>
+                                    </div>                                                                                          
+                                </Link>   
                             </div>
-                            <p className='orderdet'>Order id &mdash; <span>{el._id}</span></p>
-                            <div className='grid grid-1-col gap8'>
-                                <p className='orderdet delspan'>Payment status &mdash; <span>{el.payment_status}</span> </p>
-                                <p className='orderdet delspan'>Transit status &mdash; <span>{el.transit_status}</span></p>
-                                <p className='orderdet  delspan'>Delivery status &mdash; <span>{el.delivery_status}</span></p>
-                            </div>
-                            <div className='grid grid-2-col gap8'>
-                                <p className='orderdet billhis'>Gross bill &mdash; <span>₹{el.gross_bill}/-</span></p>
-                                <p className='orderdet billhis'>Tax &mdash;<span>₹{el.tax}/-</span></p>
-                                <p className='orderdet billhis'>Total bill &mdash; <span>₹{el.total_bill}/-</span></p>
-                            </div>
-                            <div className='flex flex-3 gap16'>
-                                <button className='cancelBtn'>Items</button>
-                            </div>
-                            <div className='orderDetails'>
-                                {el.order_items.map(item=>
-
-                                    <Link to={`/product/${item.id}`} className='odlink'>
-                                        <div className='ordeIte grid grid-3-col gap8 pad8'>
-                                            <p className='orId orIdSKU'>SKU code &mdash; <span>{item.id}</span></p>
-                                            <p className='orId'>Color &mdash; <span>{item.color}</span></p>
-                                            <p className='orId'>Quanity &mdash; <span>{item.count}</span></p>
-                                            <p className='orId'>Size &mdash; <span>{item.size}</span></p>
-                                        </div>
-                                    </Link>
-                                )}
-                            </div>
-                            <div className='flex flex-3 gap16'>
-                                <button className='cancelBtn'>Refund status &mdash; refunded</button>
-                            </div>
+                            <p className='refundStatus orId'>Refund status &mdash; <span className={el.refund == 'Pending' ? "redStatus": "GreenStatus"} >{el.refund}</span></p>
                         </div>
-                    }
-                    </>
-                )}
+                    )}
+                </div>
+                    
             </div>
         </div>
     )

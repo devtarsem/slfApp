@@ -446,7 +446,7 @@ const productStore = create(
             
             axios({
                 method : "POST",
-                url : "http://127.0.0.1:3003/api/v1/order/online",
+                url : "https://demandbackend.onrender.com/api/v1/order/online",
                 data : {
                     amount
                 }
@@ -461,7 +461,7 @@ const productStore = create(
                     handler: function (response) {
                         axios({
                             method : "POST",
-                            url : "http://127.0.0.1:3003/api/v1/order/verify",
+                            url : "https://demandbackend.onrender.com/api/v1/order/verify",
                             data : {
                                 products : order_items ,
                                 tax : tax*gross_bill/100,

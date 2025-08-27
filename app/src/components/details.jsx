@@ -25,9 +25,9 @@ function Details(){
     }
 
     useEffect(el=>{
-        console.log(params)
         fetchDetailsOfProduct(params.id)
         extratingItemPresentInCartOrNot(params.id)
+        console.log(details_of_product)
     }, [params.id])
 
     const [units, setunits] = useState(1)
@@ -80,6 +80,11 @@ function Details(){
             Pop("Invalid", "Please choose the color")
             return
         }
+
+        if(units > details_of_product?.stock[size]){
+            Pop("OOPs", "Please reduce the quantity")
+            return
+        }
         const itemDetails = {
             size : size,
             units : units,
@@ -88,7 +93,7 @@ function Details(){
             name : details_of_product.name,
             brand : details_of_product.brand,
             price : details_of_product.price,
-            image : details_of_product.Images,
+            image : [details_of_product.Images[0]],
             cancel : false,
             sku : sku
         }
@@ -104,9 +109,9 @@ function Details(){
             name : details_of_product.name,
             brand : details_of_product.brand,
             price : details_of_product.price,
-            image : details_of_product.Images,
+            image : [details_of_product.Images[0]],
             cancel : false,
-            sku : sku
+            sku : sku,
         }
         updatingCart(itemDetails)
     }
@@ -124,7 +129,7 @@ function Details(){
                 <div className='flexofDiscont flex flex-2 gap16'>
                     <p className='dos'>{details_of_product?.discount}% off</p>
                 </div>
-                <img src={mock} className='mockImg' alt='moock'/>
+                <img src={details_of_product?.Images ? details_of_product?.Images[0] : mock} className='mockImg' alt='moock'/>
                 {/* <div className='containerOfImages flex flex-2 flex-dir gap16'>
                     {[1,2,3].map(mo=>
                         <button className='nextImg'>
@@ -163,18 +168,40 @@ function Details(){
                         <p className='sizes label'>Size</p>
                         <button onClick={openChart} className='sizeChartBtn'>Size chart</button>
                     </div>
-                    <div className='flex gap16'>
-                        {details_of_product?.sizes?.map(el=>
-                            <button onClick={(event)=> selectSize(event, el)} className={size == el ? 'btns sizesbox activeBoxSize' : 'btns sizesbox'}>{el}</button>
-                        )}
+                    <div className='flex flex-1 gap16'>
+                        <div className='cover flex flex-1 gap16'>
+                            {details_of_product?.sizes?.map(el=>
+                                <button onClick={(event)=> selectSize(event, el)} className={size == el ? 'btns sizesbox activeBoxSize' : 'btns sizesbox'}>{el}</button>
+                            )}
+                        </div>
+                        
                     </div>
                 </div>
                 <div className='sizes flex flex-dir gap8'>
                     <p className='sizes label'>Color</p>
-                    <div className='flex gap16'>
-                        {details_of_product?.colors?.map(el=>
-                            <button onClick={(event)=> selectColor(event, el)} className={color==el ? 'btns sizesbox activeBoxSize' : 'btns sizesbox'} style={{backgroundColor : el}} ></button>
-                        )}
+                    <div className='flex flex flex-1 gap16'>
+                        <div className='grid grid-5-col gap16'>
+                            {details_of_product?.colors?.map(el=>
+                                <button onClick={(event)=> selectColor(event, el)} className={color==el ? 'btns sizesbox activeBoxSize' : 'btns sizesbox'} style={{backgroundColor : el}} ></button>
+                            )}
+                        </div>
+                        <div className='sizeIntegration'>
+                            {size == 'M' &&
+                                <p className='sizevalue'>Only {details_of_product?.stock?.M} left</p>
+                            }
+                            {size == 'L' &&
+                                <p className='sizevalue'>Only {details_of_product?.stock?.L} left</p>
+                            }
+                            {size == 'S' &&
+                                <p className='sizevalue'>Only {details_of_product?.stock?.S} left</p>
+                            }
+                            {size == 'XL' &&
+                                <p className='sizevalue'>Only {details_of_product?.stock?.XL} left</p>
+                            }
+                            {size == 'XXL' &&
+                                <p className='sizevalue'>Only {details_of_product?.stock?.XXL} left</p>
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className='flex flex-1 gap16'>

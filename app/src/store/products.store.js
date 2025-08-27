@@ -422,6 +422,14 @@ const productStore = create(
             let order_items = []
             cart.forEach(el=>{
                 const obj = {
+    //                 color: 'Black',
+    // count: 2,
+    // id: 'a402bab064524b77ba012175',
+    // size: 'L',
+    // name: 'Product 4 T-Shirt',
+    // brand: 'TrendX',
+    // price: 329.17,
+    // cancel: false
                     color : el.color,
                     count : el.units,
                     id : el.productId,
@@ -429,7 +437,7 @@ const productStore = create(
                     name : el.name,
                     brand : el.brand,
                     price : el.price,
-                    image : el.Images,
+                    image : el.image,
                     cancel : el.cancel,
                 }
                 order_items.push(obj)
@@ -438,7 +446,7 @@ const productStore = create(
             
             axios({
                 method : "POST",
-                url : "https://demandbackend.onrender.com/api/v1/order/online",
+                url : "http://127.0.0.1:3003/api/v1/order/online",
                 data : {
                     amount
                 }
@@ -453,7 +461,7 @@ const productStore = create(
                     handler: function (response) {
                         axios({
                             method : "POST",
-                            url : "https://demandbackend.onrender.com/api/v1/order/verify",
+                            url : "http://127.0.0.1:3003/api/v1/order/verify",
                             data : {
                                 products : order_items ,
                                 tax : tax*gross_bill/100,

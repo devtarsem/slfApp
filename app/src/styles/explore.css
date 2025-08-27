@@ -325,3 +325,8 @@
     background: none;
     cursor: pointer;
 }
+.sizevalue{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: red;
+}

@@ -69,7 +69,7 @@ function Cart(){
                     {extractedCart?.map(el=>
                         <div className='cartrbox flex flex-dir pad16 gap16'>
                             <div className='leftbox flex flex-3 gap8'>
-                                <img src={mock} className='smallIcon' alt='icon'/>
+                                <img src={el.item.Images[0]} className='smallIcon' alt='icon'/>
                                 <div className='cartval flex flex-dir gap16'>
                                     <p className='namevart'>{el.item.name}</p>
                                     <p className='cartProce'>₹{el.item.price}/-</p>

@@ -20,6 +20,7 @@ function Refunds(){
     useEffect(el=>{
         // OrdersHistory()
         cancelledSKUFetching()
+        console.log(cancelled_SKU)
     }, [])
 
     const [zeroCancellation, setZeroCancellation] = useState(false);
@@ -67,7 +68,7 @@ function Refunds(){
                             <div className='contentSku '>
                                 <Link to={`/product/${6556}`} className='odlink'>
                                     <div className='skuimg'>
-                                        <img src={mock} className='mockImgOfOrder' alt='sku image'/>
+                                        <img src={el?.image[0]} className='mockImgOfOrder' alt='sku image'/>
                                     </div>                                                                                          
                                 </Link>   
                             </div>

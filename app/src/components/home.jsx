@@ -90,7 +90,7 @@ function Home(){
                                     <div className='banner flex flex-2'>
                                         <p className='bannerop'>{el.discount}% off</p>
                                     </div>
-                                    <img src={mock} className='mockups' alt='mockup'/>
+                                    <img src={el.Images ? el.Images[0] : mock} className='mockups' alt='mockup'/>
                                     <div className='pad8 flex flex-dir gap8'>
                                         <p className='name'>{el.name.slice(0,15)}...</p>
                                         <p className='price'>₹{el.price}/-</p>

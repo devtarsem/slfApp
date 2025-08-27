@@ -21,6 +21,7 @@ function OrderHistory(){
 
     useEffect(el=>{
         OrdersHistory()
+        console.log(order_history)
     }, [])
 
     // useEffect(el=>{
@@ -150,7 +151,7 @@ function OrderHistory(){
                                                     </div>
                                                 <Link to={`/product/${item.id}`} className='odlink'>
                                                     <div className='skuimg'>
-                                                        <img src={mock} className='mockImgOfOrder' alt='sku image'/>
+                                                        <img src={item?.image[0]} className='mockImgOfOrder' alt='sku image'/>
                                                     </div>                                                                                          
                                                 </Link>                                                                                                                                                                                                                                                                                                                                                      
                                                 </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
